@@ -1,0 +1,5 @@
+//posgre server 
+sudo docker compose up -d
+//pgadmin
+sudo docker run -d -e PGADMIN_DEFAULT_EMAIL=test@mail.com -e PGADMIN_DEFAULT_PASSWORD=test -p 8080:80 elestio/pgadmin 
+//prvo punjenje baze 24736 proizvoda na sajtu - u bazi 24732

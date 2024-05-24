@@ -1,0 +1,78 @@
+---------------preciscavanje baze-----------------
+
+DELETE FROM knjige_filtered 
+WHERE id IN (
+		SELECT id
+		FROM knjige_filtered
+       WHERE strana = -1 
+             OR izdavac LIKE ''
+             OR format LIKE '' 
+             OR povez LIKE '' 
+             OR autor LIKE '' 
+             OR godina LIKE '' 
+             OR opis LIKE ''
+	)
+
+--------------------pod a-------------------------
+
+SELECT kategorija, COUNT(id) 
+	FROM knjige_filtered
+	GROUP BY kategorija
+
+
+--------------------pod b-------------------------
+
+SELECT izdavac, COUNT(id)
+	FROM knjige_filtered
+	GROUP BY izdavac
+
+--------------------pod c-------------------------
+
+SELECT title, opis from knjige_filtered
+    WHERE opis LIKE '% ljubav %'
+
+SELECT COUNT(id) from knjige_filtered
+    WHERE opis LIKE '% ljubav %'
+
+--------------------pod d-------------------------
+
+SELECT godina, COUNT(id) from knjige_filtered
+    WHERE date_part('year',to_date(godina,'YYYY')) > (date_part('year', CURRENT_DATE)-7)
+    group by godina
+    order by godina
+
+
+--------------------pod e-------------------------
+SELECT title, autor, format, povez, strana, cena from knjige_filtered
+    order by cena desc
+    limit 30
+
+
+
+--------------------pod f-------------------------
+SELECT title, format, strana, povez, godina, cena
+    FROM public.knjige_filtered
+    WHERE to_date(godina,'YYYY') = to_date('2024','YYYY')  or to_date(godina,'YYYY') = to_date('2023','YYYY')
+    order by cena
+
+
+--------------------pod g1-------------------------
+    SELECT title, format, povez,cena, strana  from knjige_filtered
+    order by strana desc
+    limit 30
+
+--------------------pod g2-------------------------
+    SELECT title, autor, format, povez, strana, cena from knjige_filtered
+    order by cena desc
+    limit 30
+
+
+--------------------pod g3-------------------------
+    --po formatu!
+
+
+
+
+---------------PREPRAVLJANJE FORMATA-------------------------------
+UPDATE knjige_filtered_2
+SET format = CONCAT(SPLIT_PART(REPLACE(format, ',', '.'), 'x', 1), 'x', SPLIT_PART(SPLIT_PART(REPLACE(format, ',', '.'), 'x', 2), 'x', 1))

@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  pszpsql:
+    image: postgres:13.15-bullseye
+    ports:
+      - 5432:5432
+    volumes:
+      - /usr/local/etc/knjigedb:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=knjigedb
