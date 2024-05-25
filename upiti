@@ -68,11 +68,81 @@ SELECT title, format, strana, povez, godina, cena
 
 
 --------------------pod g3-------------------------
-    --po formatu!
-
+   SELECT id,
+    title,
+    povez,
+    cena,
+    strana,
+    format
+   FROM knjige_filtered
+  ORDER BY (format::numeric) DESC
+ LIMIT 30;
 
 
 
 ---------------PREPRAVLJANJE FORMATA-------------------------------
 UPDATE knjige_filtered_2
 SET format = CONCAT(SPLIT_PART(REPLACE(format, ',', '.'), 'x', 1), 'x', SPLIT_PART(SPLIT_PART(REPLACE(format, ',', '.'), 'x', 2), 'x', 1))
+
+
+update pomocna set 
+	format =  REPLACE(REPLACE(REPLACE(format, ' ', ''), 'X', 'x'), ',', '.')
+	where format ~ '\d+[,]?\d*[xX]\d+[,]?\d*$'
+
+update pomocna set 
+format =  REPLACE(REPLACE(REPLACE(format, ' ', ''), '?', 'x'), ',', '.')
+where format ~ '\d+[,]?\d*[?]\d+[,]?\d*$'
+
+update pomocna set 
+	format =  REPLACE(format, 'cm', '')
+	where format ~ 'cm$'
+
+update pomocna set 
+format =  REPLACE(REPLACE(REPLACE(REPLACE(format, '?', 'x'), ' ', ''), 'X', 'x'), ',', '.')
+where format ~ '\d+[.,]?\d*\s*[xX]\s*\d+[.,]?\d*\s*$'
+
+
+update pomocna set 
+	format =  REPLACE(format, 'A5', '14.8x21')
+	where format ~ 'A5'
+
+update pomocna set 
+    format =  REPLACE(format, 'B5', '17.6x25')
+    where format ~ 'B5'
+
+update pomocna set 
+    format =  REPLACE(REPLACE(format, 'X', 'x'), 'CM', '')
+    where format ~ '.*CM'
+
+update pomocna set 
+    format =  REPLACE(format, '..', '.') 
+	where format ~ '\.{2}';
+
+update pomocna set 
+    format =  REPLACE(REPLACE(format, ',', '.') , 'Xx', 'x') 
+    where format ~'.*Xx.*'
+
+update pomocna set 
+	format =  REPLACE(REPLACE(REPLACE(REPLACE(format, ',', '.'), ' ', ''), 'X', 'x'), 'V', '')
+where format ~ 'V$'
+
+delete from pomocna 
+where format !~ '^\d+[.]?\d*[x]\d+[.]?\d*$'
+
+SELECT format
+       (CAST(split_part(format, 'x', 1) AS numeric) * CAST(split_part(format, 'x', 2) AS numeric)) AS format_new
+FROM pomocna
+WHERE format ~ '^\d+[.]?\d*[x]\d+[.]?\d*$'
+
+
+update pomocna set 
+      format= (CAST(split_part(format, 'x', 1) AS numeric) * CAST(split_part(format, 'x', 2) AS numeric))
+
+-----------------------3----------------------
+--a)
+select izdavac, count(id)
+from knjige_filtered
+	group by izdavac
+	order by count(id) desc
+limit 10
+--b)
