@@ -140,9 +140,12 @@ update pomocna set
 
 -----------------------3----------------------
 --a)
+
 select izdavac, count(id)
 from knjige_filtered
 	group by izdavac
 	order by count(id) desc
 limit 10
+
+
 --b)

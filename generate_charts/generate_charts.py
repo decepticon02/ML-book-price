@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 NAME='3-5 Po cenama.csv'
 
-data = pd.read_csv(f'csv_from_db/{NAME}')
+data = pd.read_csv(f'{NAME}')
 
 print(data)
 #################### Za generisanje 3-3 ##################################
