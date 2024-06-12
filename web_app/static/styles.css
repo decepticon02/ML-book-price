@@ -1,0 +1,92 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: bisque;
+    font-family: sans-serif;
+    font-size: 20px;
+    text-align: center;
+  }
+  .row {
+    display: flex;
+  }
+  
+  .column {
+    flex: 50%;
+  }
+
+  a,
+  a:visited {
+    color: #007bff;
+  }
+  
+  a:hover {
+    color: #0056b3;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin: 0 5px;
+  }
+  
+  main {
+    width: 100%;
+  }
+  .custom-select {
+    min-width: 80%;
+  }
+  input{
+    width: 80%;
+    height: 50px;
+    cursor: pointer;
+    border: 1px solid #caced1;
+    border-radius: 0.25rem;
+    font-size: 1.15rem;
+  }
+  select {
+    width: 80%;
+    font-size: 1.15rem;
+    padding: 0.675em 3em 0.675em 1em;
+    background-color: #fff;
+    border: 1px solid #caced1;
+    border-radius: 0.25rem;
+    color: #000;
+    cursor: pointer;
+  }
+  .back-link {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: black;
+    text-decoration: none;
+  }
+  button{
+
+    margin: 0 10px; 
+    width: 200px;
+    height: 80px;
+    font-size: 16px; 
+    background-color: #39b2ac;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: background-color 0.3s;
+  }
+button:hover {
+    background-color: #45a049;
+  }
+
+.resultDiv {
+    margin-top: 200px;
+    margin-bottom: 200px; 
+}
+.resultDiv label {
+    font-size: 50px;
+}

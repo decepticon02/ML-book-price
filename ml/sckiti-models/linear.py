@@ -21,13 +21,13 @@ dataORIG=db.getTable('knjige_filtered',columns=['id','sifra','title','autor','ka
 db.close()
 
 
-data = dataORIG.copy().drop(columns=['opis','autor','sifra','title','id'])
+data = dataORIG.copy().drop(columns=['opis','autor','sifra','title','id']) #ostale u opticaju povez, godina, kategorija, strana, format
 
-# label_encoder = LabelEncoder()
-# data['povez'] = label_encoder.fit_transform(data['povez'])
+#label_encoder = LabelEncoder()
+#data['izdavac'] = label_encoder.fit_transform(data['izdavac'])
 
 #one-hot-encoding za kategoriju
-data = pd.get_dummies(data, columns=['povez','izdavac','godina','kategorija'])
+data = pd.get_dummies(data, columns=['povez','godina','kategorija','izdavac'])
 
 y = data['cena']
 x = data.drop(columns=['cena'])
@@ -35,12 +35,10 @@ x = data.drop(columns=['cena'])
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
 
-scaler = StandardScaler()
-x_train_scaled = scaler.fit_transform(x_train)
-x_test_scaled = scaler.fit_transform(x_test)
-y_test=scaler.fit_transform(y_test.to_numpy().reshape(-1, 1))
-y_train=scaler.fit_transform(y_train.to_numpy().reshape(-1, 1))
 
+scaler = StandardScaler()
+x_train_scaled = scaler.fit_transform(x_train,y_train)
+x_test_scaled = scaler.transform(x_test)
 
 ###############GRID HYPER PARAMS OPTIMIZING#############
 # param_grid = {
@@ -59,7 +57,7 @@ y_train=scaler.fit_transform(y_train.to_numpy().reshape(-1, 1))
 # predictions = best_model.predict(x_test_scaled)
 ################## OPTIMIZED ######################
 
-best_model= SGDRegressor(alpha=0.0001,epsilon=0.1,eta0=0.0001,learning_rate='adaptive',tol=0.0001,max_iter=8000,penalty='l2',verbose=1)
+best_model= SGDRegressor(alpha=0.0001,epsilon=0.1,eta0=0.0001,learning_rate='adaptive',tol=0.0001,max_iter=8000,penalty='l2')#,verbose=1)
 best_model.fit(x_train_scaled,y_train)
 
 predictions = best_model.predict(x_test_scaled)

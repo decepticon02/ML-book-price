@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: bisque;
+    font-family: sans-serif;
+    font-size: 20px;
+    margin: 230px auto 0;
+    text-align: center;
+    justify-content: center;
+  }
+
+  a,
+  a:visited {
+    color: #007bff;
+  }
+  
+  a:hover {
+    color: #0056b3;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin: 0 5px;
+  }
+  
+  main {
+    width: 80%;
+    margin: 70px auto 0;
+  }
+
+  .button-container {
+    text-align: center;
+  }
+  
+  .button-container button {
+    margin: 0 10px; 
+    width: 160px;
+    height: 80px;
+    font-size: 16px; 
+    background-color: #39b2ac;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: background-color 0.3s;
+}
+  
+  .button-container button:hover {
+    background-color: #45a049;
+  }

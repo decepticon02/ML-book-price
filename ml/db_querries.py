@@ -24,6 +24,65 @@ class DbClass:
             sys.exit(1)
         print('Povezani na bazu')
         
+    def getGodine(self):
+        cursor = self.conn.cursor()
+        try:
+            cursor.execute("SELECT distinct godina FROM knjige_filtered order by godina desc;")
+        except (Exception, psycopg2.DatabaseError) as error:
+                print('Error: %s' % error)
+                cursor.close()
+                return 1
+    
+        rows = cursor.fetchall()
+        cursor.close()
+        
+        return rows
+    
+
+    def getPovez(self):
+        cursor = self.conn.cursor()
+        try:
+            cursor.execute("SELECT distinct povez FROM knjige_filtered;")
+        except (Exception, psycopg2.DatabaseError) as error:
+                print('Error: %s' % error)
+                cursor.close()
+                return 1
+    
+        rows = cursor.fetchall()
+        cursor.close()
+        
+        return rows
+    
+
+    def getIzdavaci(self):
+        cursor = self.conn.cursor()
+        try:
+            cursor.execute("SELECT distinct izdavac FROM knjige_filtered  order by izdavac;")
+        except (Exception, psycopg2.DatabaseError) as error:
+                print('Error: %s' % error)
+                cursor.close()
+                return 1
+    
+        rows = cursor.fetchall()
+        cursor.close()
+        
+        return rows
+
+
+    def getKategorije(self):
+        cursor = self.conn.cursor()
+        try:
+            cursor.execute("SELECT distinct kategorija FROM knjige_filtered order by kategorija;")
+        except (Exception, psycopg2.DatabaseError) as error:
+                print('Error: %s' % error)
+                cursor.close()
+                return 1
+    
+        rows = cursor.fetchall()
+        cursor.close()
+        
+        return rows
+
 
 
     def getTable(self, tbl,columns):

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Book price prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='homepagestyle.css') }}">
+</head>
+<body>
+<h1>Book price prediction</h1>
+<section>
+  <header>
+    <h2>Choose ML algorithm</h2>
+  </header>
+  <main>
+    <div class="button-container">
+      <button onclick="window.location.href='{{ url_for('pages.linear') }}'" type="button">Linear regression </button>
+      <button onclick="window.location.href='{{ url_for('pages.logisticonevsrest') }}'" type="button">Logistic regression OVR</button>    
+      <button onclick="window.location.href='{{ url_for('pages.logisticonevsone') }}'" type="button">Logistic regression OVO</button>    
+      <button onclick="window.location.href='{{ url_for('pages.logisticmultinomial') }}'" type="button">Logistic regression multinomial</button>
+ 
+      <button onclick="window.location.href='{{ url_for('pages.kmeans') }}'" type="button">KMeans </button>
+    </div>
+  </main>
+</section>
+</body>
+</html>

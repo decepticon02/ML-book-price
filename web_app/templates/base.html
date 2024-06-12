@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<h1>Book price prediction</h1>
+<section>
+  <header>
+    
+    <a href="{{ url_for('pages.home') }}" class="back-link">&#8592; Back to Home</a>
+    {% block header %}{% endblock header %}
+  </header>
+  <main>
+    {% block formheader %}{% endblock formheader %}
+    
+
+    <div class="row">
+      <div class="form column">
+        {% block form %}{% endblock form %}
+      </div>
+      <div class="output column">
+        {% block output %}{% endblock output %}
+      </div>
+    </div>
+    </form>
+  </main>
+</section>
+</body>
+</html>

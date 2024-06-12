@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}Logistic OVR regression{% endblock title %}</h2>
+{% endblock header %}
+
+{% block formheader %}
+<form method="POST" action="/logisticonevsrest">
+{% endblock formheader %}
+
+
+{% block form %}
+  <h3>Izaberite izdavaca: </h3>
+  <div class="custom-select ">
+    <select id="izdavac" name="izdavac">
+      {% for item in izdavaci %}
+      <option value="{{ item[0] }}" {% if item[0] == selected_izdavac %} selected {% endif %}>{{ item[0] }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <h3>Izaberite kategoriju: </h3>
+  <div class="custom-select ">
+    <select id="kategorija" name="kategorija">
+      {% for item in kategorije %}
+      <option value="{{ item[0] }}" {% if item[0] == selected_kategorija %} selected {% endif %}>{{ item[0] }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <h3>Izaberite godinu: </h3>
+  <div class="custom-select ">
+    <select id="godina" name="godina">
+      {% for item in godine %}
+      <option value="{{ item[0] }}" {% if item[0] == selected_godina %} selected {% endif %}>{{ item[0] }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <h3>Izaberite povez: </h3>
+  <div class="custom-select ">
+    <select id="povez" name="povez">
+      {% for item in povez %}
+      <option value="{{ item[0] }}" {% if item[0] == selected_povez %} selected {% endif %}>{{ item[0] }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <h3>Unesite broj strana: </h3>
+  <input id="strane" name="strane" type="text" value="{{ selected_strane }}" required>
+  
+  <h3>Unesite format kao povrsinu u cm^2: </h3>
+  <input id="format" name="format" type="text" value="{{ selected_format }}" required>
+
+{% endblock form %}
+
+
+{% block output %}
+  <br>
+<button id="calculate3" type="submit">Calculate</button>
+<br><br>
+<div class="resultDiv">
+  <label id="result">   
+{% if result == 1 %}
+    <=500
+{% elif result == 2 %}
+    500-1500
+{% elif result == 3 %}
+    1500-3000
+{% elif result == 4 %}
+    3000-5000
+{% elif result == 5 %}
+    5000-15000
+{% elif result == 6 %}
+    >15000
+{% endif %} </label>
+</div>
+{% endblock output %}
